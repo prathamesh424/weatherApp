@@ -17,7 +17,7 @@ export default function Weather() {
   } = useFetchWeather(geoData, searchQuery);
   const { t } = useTranslate();
   if (loading) {
-    return <p className='text-blue-500 text-lg font-semibold'>Loading ...</p>;
+    return <p className='text-blue-500 text-lg font-semibold'>{t('Loading')}  ...</p>;
   }
 
   const { currentWeather, forecast } = data || {};
@@ -33,14 +33,14 @@ export default function Weather() {
 
   return (
     <div>
-      {error && <p>{error.message}</p>}
+      {error && <p>{t('not-allow')} </p>}
       {apiError && <p>{apiError.message}</p>}
-      <div className='bg-white shadow-md p-2 rounded-lg mb-4 w-full'>
+      <div className='bg-black shadow-md p-2 rounded-lg mb-4 w-full  border-2 border-red-500'>
         <form onSubmit={handleSearch}>
           <input
             type='text'
-            placeholder='Enter city name'
-            className='p-2 border text-white border-gray-300 rounded'
+            placeholder={t('enter-city')} 
+            className='p-2 border bg-white text-black border-gray-300 rounded '
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
@@ -54,13 +54,13 @@ export default function Weather() {
       </div>
 
       {currentWeather && (
-        <div className='bg-white shadow-md p-6 rounded-lg mb-4 w-full'>
+        <div className='bg-black text-white shadow-md p-6 rounded-lg mb-4 w-full border-2 border-red-500'>
           <WeatherCard data={currentWeather} />
         </div>
       )}
 
       {forecast && (
-        <div className='bg-white shadow-md p-6 rounded-lg mb-4 w-full'>
+        <div className='bg-black text-white shadow-md p-6 rounded-lg mb-4 w-full border-2 border-red-500'>
           <Forecast forecast={forecast} />
         </div>
       )}
